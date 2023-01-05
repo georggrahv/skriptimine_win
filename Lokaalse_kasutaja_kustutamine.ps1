@@ -1,3 +1,15 @@
-﻿$eesnimi = Read-Host "Sisesta oma eesnimi"
-$perekonnanimi = Read-Host "Sisesta oma perekonnanimi"
-New-LocalUser "$eesnimi.ToLower().$perekonnanimi.ToLower()" -Password $KasutajaParool -FullName "$eesnimi $perekonnanimi"
+﻿$eesnimi = read-host "Sisestage kasutaja eesnimi: "
+$eesnimi = $eesnimi
+$perenimi = read-host "Sisestage kasutaja perenimi: "
+$perenimi = $perenimi
+Remove-LocalUser -Name "$eesnimi $perenimi"
+if($?)
+{   
+echo "Kasutaja on edukalt kustutatud."
+
+}
+else
+{
+$ErrorActionPreference = 'SilentlyContinue'
+echo "Kasutaja ei eksisteeri või kustutamisel tekkis muu viga, proovige uuesti."
+}
